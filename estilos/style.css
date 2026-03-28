@@ -1,0 +1,217 @@
+/* Reset global - Remove espaçamentos padrão e padroniza o cálculo de caixas */
+* {
+    margin: 0;               /* Remove margem padrão de todos os elementos */
+    padding: 0;              /* Remove preenchimento padrão de todos os elementos */
+    box-sizing: border-box;  /* Inclui padding e border no cálculo de width/height */
+}
+
+/* Variáveis CSS globais - Define as cores e transições usadas em todo o projeto */
+:root {
+    --primary-color: #000;       /* Cor de fundo principal (preto Netflix) */
+    --secondary-color: #1a1a1a;  /* Cor de fundo secundária (cinza escuro) */
+    --text-color: #fff;          /* Cor de texto principal (branco) */
+    --accent-color: #e50914;     /* Cor de destaque (vermelho Netflix) */
+    --transition: 0.3s ease;     /* Duração e tipo de animação padrão */
+}
+
+body.light-theme {
+    --primary-color: #f4f4f4;
+    --secondary-color: #ffffff;
+    --text-color: #111;
+    --accent-color: #f00612;
+}
+
+
+/* Estilos do body - Define aparência geral da página */
+body {
+    background-color: var(--primary-color);           /* Define fundo preto */
+    color: var(--text-color);                         /* Define cor de texto padrão */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define tipografia moderna */
+    min-height: 100vh;            /* Garante que a página tenha no mínimo a altura da tela */
+}
+
+/* Container principal - Centraliza e organiza verticalmente o conteúdo */
+main {
+    position: relative;
+    display: flex;              /* Ativa layout flexível */
+    flex-direction: column;     /* Organiza itens em coluna vertical */
+    align-items: center;        /* Centraliza itens horizontalmente */
+    justify-content: center;    /* Centraliza itens verticalmente */
+    min-height: 100vh;          /* Ocupa no mínimo a altura da tela */
+    padding: 2rem;              /* Espaçamento interno */
+}
+
+/* Cabeçalho com logo */
+.site-header {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+}
+
+.site-logo img {
+    display: block;
+    width: 140px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+/* Título principal - Estilos do heading */
+h1 {
+    font-size: 2.5rem;         /* Tamanho grande para destaque */
+    margin-bottom: 6rem;     /* Espaçamento abaixo do título */
+    text-align: center;        /* Alinha texto ao centro */
+    font-weight: 700;          /* Deixa texto mais bold (peso 700) */
+    letter-spacing: 0.05em;    /* Aumenta espaço entre letras */
+}
+
+/* Container dos perfis - Organiza os perfis em linha */
+.profiles {
+    display: flex;              /* Ativa layout flexível */
+    gap: 3rem;                  /* Espaço entre os perfis */
+    flex-wrap: wrap;            /* Permite quebra de linha em telas menores */
+    justify-content: center;    /* Centraliza perfis horizontalmente */
+    align-items: center;        /* Alinha perfis no eixo vertical */
+}
+
+/* Remove marcador padrão do <ul> e reset de margens/paddings */
+.profiles ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.profiles li {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Estilo individual de cada perfil (link) */
+.profile {
+    color: var(--text-color);   /* Define cor do texto */
+    cursor: pointer;            /* Muda cursor para indicar clicabilidade */
+    transition: transform var(--transition), filter var(--transition); /* Suaviza animações */
+}
+
+/* Remove sublinhado do link do perfil e mantém cor branca */
+.profile a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Efeito ao passar mouse no perfil */
+.profile:hover {
+    transform: scale(1.08);     /* Aumenta o tamanho em 8% */
+    filter: brightness(1.1);    /* Aumenta o brilho em 10% */
+}
+
+/* Efeito ao clicar no perfil */
+.profile:active {
+    transform: scale(0.95);     /* Reduz o tamanho em 5% para feedback visual */
+}
+
+/* Container semântico de imagem com legenda */
+figure {
+    display: flex;              /* Ativa layout flexível */
+    flex-direction: column;     /* Organiza em coluna */
+    align-items: center;        /* Centraliza itens */
+    gap: 1rem;                  /* Espaço entre imagem e legenda */
+    position: relative;         /* Permite posicionamento absoluto dos filhos */
+}
+
+/* Estilo da imagem do perfil */
+figure img {
+    width: 180px;               /* Largura fixa da imagem */
+    height: 180px;              /* Altura fixa da imagem (quadrada) */
+    border-radius: 12px;        /* Cantos arredondados */
+    object-fit: cover;          /* Redimensiona mantendo proporção e cobrindo área */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Sombra para destaque */
+    transition: box-shadow var(--transition); /* Suaviza mudança de sombra */
+}
+
+/* Efeito de sombra ao passar mouse na imagem */
+.profile:hover figure img {
+    box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5); /* Aumenta sombra com cor vermelha Netflix */
+}
+
+/* Estilo da legenda (nome do perfil) */
+figcaption {
+    font-size: 1.2rem;          /* Tamanho do texto */
+    font-weight: 500;           /* Espessura média do texto */
+    text-align: center;         /* Alinha texto ao centro */
+    transition: color var(--transition); /* Suaviza mudança de cor */
+}
+
+/* Responsividade para telas pequenas (até 900px) - Grid 2x2 para perfis */
+@media (min-width: 610px) and (max-width: 928px) {
+    .profiles ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 3rem;
+        justify-items: center;
+    }
+
+    .profiles {
+        display: block;
+    }
+
+    .profiles li.profile {
+        width: 100%;
+        max-width: 220px;
+    }
+}
+
+/* Responsividade para tablets (até 768px) - Reduz tamanhos para telas menores */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;        /* Reduz tamanho do título */
+        margin-bottom: 2rem;    /* Reduz espaçamento */
+    }
+
+    .profiles {
+        gap: 2rem;              /* Reduz espaço entre perfis */
+    }
+
+    figure img {
+        width: 150px;           /* Reduz tamanho da imagem */
+        height: 150px;
+    }
+
+    figcaption {
+        font-size: 1rem;        /* Reduz tamanho da legenda */
+    }
+}
+
+/* Responsividade para smartphones (até 480px) - Otimiza para telas muito pequenas */
+@media (max-width: 480px) {
+    main {
+        padding: 1rem;          /* Reduz padding para economizar espaço */
+    }
+
+    h1 {
+        font-size: 1.5rem;      /* Reduz bastante o título */
+        margin-bottom: 1.5rem;  /* Reduz espaçamento */
+    }
+
+    .profiles {
+        gap: 1.5rem;            /* Reduz espaço entre perfis */
+    }
+
+    figure img {
+        width: 120px;           /* Reduz significativamente o tamanho da imagem */
+        height: 120px;
+        border-radius: 8px;     /* Reduz levemente o raio dos cantos */
+    }
+
+    figcaption {
+        font-size: 0.9rem;      /* Reduz bastante o tamanho da legenda */
+    }
+}
